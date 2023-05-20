@@ -7,6 +7,25 @@
   min-height: 100vh;
 }
 
+.container {
+  margin: auto auto;
+  position: relative;
+}
+
+.fixed {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+  width: 50%;
+}
+
+.globe {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

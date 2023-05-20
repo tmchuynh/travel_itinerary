@@ -3,14 +3,11 @@
 
 html,
 body {
-  background-color: #EFEFEF; }
+  background-color: #070606;
+  color: #EFEFEF; }
 
 a {
   color: #4EC4AE; }
 
 a:hover {
   color: #00A896; }
-
-.container {
-  max-width: 1200px;
-  margin: auto auto; }

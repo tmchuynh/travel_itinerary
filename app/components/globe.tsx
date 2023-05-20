@@ -15,7 +15,7 @@ const GlobeVisualization: React.FC = () => {
       startLng: (Math.random() - 0.5) * 360,
       endLat: (Math.random() - 0.5) * 180,
       endLng: (Math.random() - 0.5) * 360,
-      color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)],
+      color: ['red', 'white', 'orange', 'green'][Math.round(Math.random() * 3)],
     }));
 
     const Globe = new ThreeGlobe()

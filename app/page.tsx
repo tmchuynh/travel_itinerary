@@ -27,14 +27,27 @@ export default function Home() {
       });
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      window.location.reload();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
-      <Autocomplete
+      <Autocomplete className={styles.fixed}
         label="Pick a city"
         placeholder="Los Angeles"
         data={cities}
       />
-      <GlobeVisualization/>
+      <GlobeVisualization />
     </div>
   );
 }
+

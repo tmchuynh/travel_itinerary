@@ -1,6 +1,6 @@
 $white: #EFEFEF;
 $grey: #707070;
-$black: #333232;
+$black: #070606;
 $red: #CE4257;
 $teal: #4EC4AE;
 $green: #02C39A;
@@ -12,7 +12,8 @@ $blue: #00A896;
 
 html,
 body {
-    background-color: $white;
+    background-color: $black;
+    color: $white;
 }
 
 a {
@@ -20,10 +21,5 @@ a {
     &:hover {
         color: $blue;
     }
-}
-
-.container {
-    max-width: 1200px;
-    margin: auto auto;
 }
 
