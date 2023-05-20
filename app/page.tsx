@@ -5,39 +5,57 @@ import { Container } from 'react-bootstrap';
 import styles from './page.module.css';
 import { Autocomplete } from '@mantine/core';
 import GlobeVisualization from './components/globe';
-import { useRouter } from 'next/router';
 
-export default function Home() {
-  const [cities, setCities] = useState<{ label: string; value: string; country: string }[]>([]);
-  const router = useRouter();
+interface City {
+  label: string;
+  value: string;
+  country: string;
+}
+
+export default function Home(): JSX.Element {
+  const [citiesAndCountries, setCitiesAndCountries] = useState<City[]>([]);
 
   useEffect(() => {
     fetch('https://countriesnow.space/api/v0.1/countries')
       .then((response) => response.json())
       .then((data) => {
-        const allCities = data.data.reduce((acc, country) => {
+        const citiesAndCountriesData: City[] = data.data.reduce((acc: City[], country: any) => {
           if (Array.isArray(country.cities)) {
-            const citiesWithCountry = country.cities.map((city) => `${city}, ${country.country}`);
+            const citiesWithCountry: City[] = country.cities.map((city: string) => ({
+              label: `${city}, ${country.country}`,
+              value: city,
+              country: country.country,
+            }));
             return acc.concat(citiesWithCountry);
+
           }
           return acc;
         }, []);
 
-        setCities(allCities);
+        setCitiesAndCountries(citiesAndCountriesData);
       })
       .catch((error) => {
         console.error('Error fetching cities:', error);
       });
-  }, []);
+  }, []);``
 
-
-  const handleAutocompleteChange = (selectedCity) => {
+  const handleAutocompleteChange = (selectedCity: City | null) => {
     if (selectedCity) {
       const { value, country } = selectedCity;
-      // Perform the necessary navigation logic with the selected city and country
-      router.push(`/destination/${country}/${value}`);
+      // const selectedCountry = selectedCity.country;
+
+      // Find the city object in the citiesAndCountries array
+      const selectedCityObj = citiesAndCountries.find((city) => city.value === value);
+      console.log(selectedCity, selectedCityObj);
+
+      if (selectedCityObj) {
+        const { value: cityValue, country: cityCountry } = selectedCityObj;
+        // Perform the necessary navigation logic with the selected city and country
+        // window.location.href = `/destination/${cityCountry}/${cityValue}`;
+      }
     }
   };
+
   useEffect(() => {
     const handleResize = () => {
       window.location.reload();
@@ -57,7 +75,7 @@ export default function Home() {
         className={styles.fixed}
         label="Pick a city"
         placeholder="Los Angeles"
-        data={cities}
+        data={citiesAndCountries}
         onChange={handleAutocompleteChange}
       />
       <GlobeVisualization />
