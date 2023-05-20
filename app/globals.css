@@ -7,9 +7,10 @@ body {
 
 a {
   color: #4EC4AE; }
-  a:hover {
-    color: #00A896; }
+
+a:hover {
+  color: #00A896; }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto; }
+  margin: auto auto; }

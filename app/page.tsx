@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import { Autocomplete } from '@mantine/core';
+import GlobeVisualization from './components/globe';
 
 export default function Home() {
   const [cities, setCities] = useState([]);
@@ -11,7 +12,7 @@ export default function Home() {
     fetch('https://countriesnow.space/api/v0.1/countries')
       .then((response) => response.json())
       .then((data) => {
-        const allCities = data.data.reduce((acc, country) => {
+        const allCities = data.data.reduce((acc: any[], country: { cities: any[]; country: any; }) => {
           if (Array.isArray(country.cities)) {
             const citiesWithCountry = country.cities.map((city) => `${city}, ${country.country}`);
             return acc.concat(citiesWithCountry);
@@ -33,7 +34,7 @@ export default function Home() {
         placeholder="Los Angeles"
         data={cities}
       />
+      <GlobeVisualization/>
     </div>
   );
 }
-
