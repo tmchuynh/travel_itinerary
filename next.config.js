@@ -1,4 +1,19 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+const path = require('path');
 
-module.exports = nextConfig
+const nextConfig = {
+  pageExtensions: ['ts', 'tsx'],
+  webpack(config) {
+    config.resolve.alias['@app'] = path.join(__dirname, 'app');
+    return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/Page',
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
