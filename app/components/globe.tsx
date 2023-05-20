@@ -42,13 +42,13 @@ const GlobeVisualization: React.FC = () => {
     const camera = new THREE.PerspectiveCamera();
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    camera.position.z = 500;
+    camera.position.z = 300;
 
     // Add camera controls
     const tbControls = new TrackballControls(camera, renderer.domElement);
     tbControls.minDistance = 101;
     tbControls.rotateSpeed = 5;
-    tbControls.zoomSpeed = 0.8;
+    tbControls.zoomSpeed = 0; // Set zoomSpeed to 0 to disable zoom
 
     // Kick-off renderer
     const animate = () => {

@@ -1,18 +1,19 @@
 .container {
-  background-color: #070606;
+  background-color: #000000;
   color: #efefef;
-  box-sizing: border-box;
-  margin: auto auto;
-  position: relative; }
+  margin: 0;
+  padding: 0;
 
-.fixed {
-  position: absolute;
-  top: 45%;
-  left: 25%;
-  width: 50%; }
+  h1 {
+    margin-block-start: 0;
+    margin: 0;
+    margin-block-end: 0;
+  }
 
-.globe {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover; }
+  .fixed {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 50%;
+  }
+}
