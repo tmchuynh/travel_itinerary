@@ -3,19 +3,16 @@
   color: #efefef;
   box-sizing: border-box;
   margin: auto auto;
-  position: relative;
-}
+  position: relative; }
 
 .fixed {
   position: absolute;
   top: 45%;
   left: 25%;
-  width: 50%;
-}
+  width: 50%; }
 
 .globe {
   position: relative;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
-}
+  object-fit: cover; }
