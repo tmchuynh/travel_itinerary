@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 const DestinationPage = () => {
   const router = useRouter();
   const { country, city } = router.query;
+  console.log(country, city);
 
   return (
     <div>
