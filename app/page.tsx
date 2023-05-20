@@ -39,20 +39,21 @@ export default function Home(): JSX.Element {
       });
   }, []);``
 
-  const handleAutocompleteChange = (selectedCity: City | null) => {
+  const handleAutocompleteChange = (selectedCity: String | null) => {
     if (selectedCity) {
-      const { value, country } = selectedCity;
+      // const { value, country, label } = selectedCity;
+
       // const selectedCountry = selectedCity.country;
+      console.log(typeof(selectedCity));
 
-      // Find the city object in the citiesAndCountries array
-      const selectedCityObj = citiesAndCountries.find((city) => city.value === value);
-      console.log(selectedCity, selectedCityObj);
-
-      if (selectedCityObj) {
-        const { value: cityValue, country: cityCountry } = selectedCityObj;
-        // Perform the necessary navigation logic with the selected city and country
-        // window.location.href = `/destination/${cityCountry}/${cityValue}`;
-      }
+      citiesAndCountries.forEach((city: City) => {
+        if (city.value === selectedCity) {
+          const { value: cityValue, country: cityCountry } = city;
+          console.log(cityValue, cityCountry)
+          // Perform the necessary navigation logic with the selected city and country
+          window.location.href = `/destination/${cityCountry}/${cityValue}`;
+        }
+      });
     }
   };
 
