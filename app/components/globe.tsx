@@ -4,9 +4,11 @@ import ThreeGlobe from 'three-globe';
 
 import * as THREE from 'three';
 
+// Copyright (c) 2019 Vasco Asturiano
+
 const GlobeVisualization: React.FC = () => {
   const globeRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const handleResize = () => {
       window.location.reload();
