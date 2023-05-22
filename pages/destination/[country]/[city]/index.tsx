@@ -83,7 +83,11 @@ export default function DestinationPage() {
         });
         const data = await response.json();
         setData(data);
-        console.log("DATA: ", data);
+        console.log("DATA: ", data); // data coming back from the mysql server
+        // console.log(data[0].city);
+        // console.log(data[0].country);
+        // console.log(data[0].latitude);
+        // console.log(data[0].longitude);
       } catch (error) {
         console.error(error);
       }
