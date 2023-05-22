@@ -47,8 +47,6 @@ export default function AutoComplete() {
         if (city.value === selectedCity) {
           // Destructure the city object to get the city value and country
           const { value: cityValue, country: cityCountry } = city;
-          // Log the city value and country to the console
-          console.log(cityValue, cityCountry);
           // Perform the necessary navigation logic with the selected city and country
           window.location.href = `/destination/${cityCountry}/${cityValue}`;
         }
