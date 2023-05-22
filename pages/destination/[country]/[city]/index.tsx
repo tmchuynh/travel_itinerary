@@ -52,8 +52,10 @@
 import styles from '../../../page.module.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import MapComponent from './components/MapComponent';
 import { useState, useEffect } from 'react';
+import MapComponent from './components/MapComponent';
+import RestaurantList from './components/RestaurantList';
+import ThingsToDoList from './components/ThingsToDoList';
 
 export default function DestinationPage() {
   const [data, setData] = useState(null);
@@ -64,7 +66,7 @@ export default function DestinationPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/locations', {
+        const response = await fetch('/api/destination', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -90,7 +92,14 @@ export default function DestinationPage() {
       <p>Country: {cityCountry}</p>
       <p>City: {cityValue}</p>
       <MapComponent center={position} />
+      {typeof window !== 'undefined' && window.google && (
+        <div>
+          <RestaurantList google={window.google} latitude={position[0]} longitude={position[1]} />
+          <ThingsToDoList google={window.google} latitude={position[0]} longitude={position[1]} />
+        </div>
+      )}
       <Link href={'/'}>Home</Link>
     </div>
   );
 }
+
