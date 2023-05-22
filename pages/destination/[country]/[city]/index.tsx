@@ -61,11 +61,16 @@ export default function DestinationPage() {
   const [data, setData] = useState(null);
   const position = [33.8076787, -117.9731417];
   const router = useRouter();
-  const { cityCountry, cityValue } = router.query;
-
+  
   useEffect(() => {
+    const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
+    const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
+    console.log('cityCountry:', cityCountry);
+    console.log('cityValue:', cityValue);
+
     async function fetchData() {
       try {
+        console.log('Executing query...');
         const response = await fetch('/api/destination', {
           method: 'POST',
           headers: {
@@ -78,19 +83,18 @@ export default function DestinationPage() {
         });
         const data = await response.json();
         setData(data);
-        console.log(data);
+        console.log("DATA: ", data);
       } catch (error) {
         console.error(error);
       }
     }
+
     fetchData();
-  }, [cityCountry, cityValue]);
+  }, []);
 
   return (
     <div className={styles.container}>
       <h1>Destination Page</h1>
-      <p>Country: {cityCountry}</p>
-      <p>City: {cityValue}</p>
       <MapComponent center={position} />
       {typeof window !== 'undefined' && window.google && (
         <div>
