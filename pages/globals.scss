@@ -1,0 +1,24 @@
+$white: #efefef;
+$grey: #707070;
+$black: #070606;
+$red: #ce4257;
+$teal: #4ec4ae;
+$green: #02c39a;
+$blue: #00a896;
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: $black;
+    color: $white;
+}
+
+a {
+    color: $teal;
+    &:hover {
+        color: $blue;
+    }
+}
