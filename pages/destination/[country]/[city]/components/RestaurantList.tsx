@@ -23,7 +23,7 @@ function RestaurantList({ latitude, longitude }: RestaurantListProps) {
     const request = {
       location: new google.maps.LatLng(latitude, longitude),
       radius: 2000, // Radius in meters
-      type: 'best_fancy_restaurant', // Search for tourist attractions
+      type: 'best_fancy_restaurant',
     };
 
     // Call the Places API nearby search

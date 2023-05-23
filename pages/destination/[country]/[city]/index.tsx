@@ -1,4 +1,3 @@
-import styles from '../../../page.module.scss';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import MapComponent from './components/MapComponent';
@@ -12,8 +11,6 @@ export default function DestinationPage() {
   useEffect(() => {
     const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
     const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
-    console.log('cityCountry:', cityCountry);
-    console.log('cityValue:', cityValue);
 
     async function fetchData() {
       try {
@@ -31,10 +28,6 @@ export default function DestinationPage() {
         const data = await response.json();
         setData(data);
         console.log("DATA: ", data); // data coming back from the mysql server
-        // console.log(data[0].city);
-        // console.log(data[0].country);
-        // console.log(data[0].latitude);
-        // console.log(data[0].longitude);
         if (data && data.length > 0) {
           const latitude = data[0].latitude;
           const longitude = data[0].longitude;
@@ -49,7 +42,7 @@ export default function DestinationPage() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div >
       <h1>Destination Page</h1>
       <MapComponent center={position} />
       <div style={{ display: 'flex'}}>
