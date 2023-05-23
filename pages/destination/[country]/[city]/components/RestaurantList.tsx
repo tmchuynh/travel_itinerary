@@ -41,7 +41,7 @@ function RestaurantList({ google, latitude, longitude }: RestaurantListProps) {
   }, [google, latitude, longitude]);
 
   return (
-    <div>
+    <div style={{ color: 'black' }}>
       <h2>Tourist Places Near Latitude: {latitude}, Longitude: {longitude}</h2>
       <ul>
         {restaurants.map((place) => (
