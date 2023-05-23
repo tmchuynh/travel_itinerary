@@ -41,7 +41,9 @@ function RestaurantList({ latitude, longitude }: RestaurantListProps) {
       <h2>Restaurants Near Latitude: {latitude}, Longitude: {longitude}</h2>
       <ul>
         {restaurants.map((place) => (
-          <li key={place.place_id}>{place.name}</li>
+          <li key={place.place_id}>
+            {place.name}
+            </li>
         ))}
       </ul>
     </div>

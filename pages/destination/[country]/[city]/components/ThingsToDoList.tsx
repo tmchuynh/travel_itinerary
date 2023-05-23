@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleApiWrapper, GoogleAPI } from 'google-maps-react';
+import PlaceInfo from '../../../../api/PlaceInfo';
+
 
 interface ThingsToDoListProps {
   google: GoogleAPI;
@@ -37,11 +39,14 @@ function ThingsToDoList({ google, latitude, longitude }: ThingsToDoListProps) {
   }, [google, latitude, longitude]);
 
   return (
-    <div style={{ color: 'black', position: 'absolute', top: '100%' }}>
+    <div style={{ color: 'black', position: 'absolute', top: '50%', left: '50%' }}>
       <h2>Things to Do Near Latitude: {latitude}, Longitude: {longitude}</h2>
       <ul>
         {thingsToDo.map((thing) => (
-          <li key={thing.place_id}>{thing.name}</li>
+          <li key={thing.place_id}>
+            <PlaceInfo pageTitle={thing.name}/>
+          </li>
+          
         ))}
       </ul>
     </div>
