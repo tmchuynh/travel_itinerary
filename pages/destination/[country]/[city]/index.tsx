@@ -7,7 +7,7 @@ import ThingsToDoList from './components/ThingsToDoList';
 
 export default function DestinationPage() {
   const [data, setData] = useState(null);
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState([]);
 
   useEffect(() => {
     const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
@@ -52,12 +52,10 @@ export default function DestinationPage() {
     <div className={styles.container}>
       <h1>Destination Page</h1>
       <MapComponent center={position} />
-      {typeof window !== 'undefined' && window.google && (
-        <div>
-          <RestaurantList google={window.google} latitude={position[0]} longitude={position[1]} />
-          <ThingsToDoList google={window.google} latitude={position[0]} longitude={position[1]} />
-        </div>
-      )}
+      <div style={{ display: 'flex'}}>
+        <RestaurantList latitude={position[0]} longitude={position[1]} />
+        <ThingsToDoList latitude={position[0]} longitude={position[1]} />
+      </div>
       <Link href={'/'}>Home</Link>
     </div>
   );

@@ -11,7 +11,7 @@ export default function Home(): JSX.Element {
     <Container fluid className={styles.container}>
       <h1>Travel</h1>
       <AutoComplete />
-      <GlobeVisualization />
+      {/* <GlobeVisualization /> */}
     </Container>
   );
 }
