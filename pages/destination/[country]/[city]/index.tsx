@@ -8,7 +8,7 @@ import ThingsToDoList from './components/ThingsToDoList';
 
 export default function DestinationPage() {
   const [data, setData] = useState(null);
-  const position = [33.8076787, -117.9731417];
+  const [position, setPosition] = useState(null);
   
   useEffect(() => {
     const router = useRouter();
@@ -16,10 +16,10 @@ export default function DestinationPage() {
 
   console.log('URL pathname:', pathname);
 
-    // const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
-    // const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
-    // console.log('cityCountry:', cityCountry);
-    // console.log('cityValue:', cityValue);
+    const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
+    const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
+    console.log('cityCountry:', cityCountry);
+    console.log('cityValue:', cityValue);
 
     async function fetchData() {
       try {
@@ -41,6 +41,11 @@ export default function DestinationPage() {
         // console.log(data[0].country);
         // console.log(data[0].latitude);
         // console.log(data[0].longitude);
+        if (data && data.length > 0) {
+          const latitude = data[0].latitude;
+          const longitude = data[0].longitude;
+          setPosition([latitude, longitude]);
+        }
       } catch (error) {
         console.error(error);
       }
