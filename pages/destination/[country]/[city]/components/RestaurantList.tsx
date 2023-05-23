@@ -10,26 +10,6 @@ interface RestaurantListProps {
 interface PlaceResult {
   place_id: string;
   name: string;
-  formatted_address?: string;
-  geometry?: {
-    location: {
-      lat: number;
-      lng: number;
-    };
-  };
-  types?: string[];
-  rating?: number;
-  opening_hours?: {
-    open_now: boolean;
-  };
-  photos?: {
-    getUrl: (options: { maxWidth: number; maxHeight: number }) => string;
-  }[];
-  reviews?: {
-    author_name: string;
-    rating: number;
-    text: string;
-  }[];
 }
 
 function RestaurantList({ latitude, longitude }: RestaurantListProps) {
@@ -43,7 +23,7 @@ function RestaurantList({ latitude, longitude }: RestaurantListProps) {
     const request = {
       location: new google.maps.LatLng(latitude, longitude),
       radius: 2000, // Radius in meters
-      type: 'restaurant', // Search for tourist attractions
+      type: 'best_fancy_restaurant', // Search for tourist attractions
     };
 
     // Call the Places API nearby search
@@ -61,40 +41,12 @@ function RestaurantList({ latitude, longitude }: RestaurantListProps) {
       <h2>Restaurants Near Latitude: {latitude}, Longitude: {longitude}</h2>
       <ul>
         {restaurants.map((place) => (
-          <li key={place.place_id}>
-            <h3>{place.name}</h3>
-            <p>Address: {place.formatted_address}</p>
-            <p>Rating: {place.rating}</p>
-            {place.opening_hours && (
-              <p>Open Now: {place.opening_hours.open_now ? 'Yes' : 'No'}</p>
-            )}
-            {place.photos && (
-              <img
-                src={place.photos[0].getUrl({ maxWidth: 100, maxHeight: 100 })}
-                alt="Place Photo"
-              />
-            )}
-            {place.reviews && (
-              <ul>
-                {place.reviews.map((review) => (
-                  <li key={review.author_name}>
-                    <p>Author: {review.author_name}</p>
-                    <p>Rating: {review.rating}</p>
-                    <p>Review: {review.text}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
+          <li key={place.place_id}>{place.name}</li>
         ))}
       </ul>
     </div>
   );
 }
-
-
-
-
 
 export default GoogleApiWrapper({
   apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
