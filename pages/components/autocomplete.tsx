@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from '../../app/page.module.css';
+import styles from '../page.module.scss';
 import { Autocomplete } from '@mantine/core';
 
 interface City {

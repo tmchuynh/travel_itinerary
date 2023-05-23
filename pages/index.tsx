@@ -10,7 +10,7 @@ export default function Home(): JSX.Element {
   return (
     <Container fluid className={styles.container}>
       <h1>Travel</h1>
-      <AutoComplete  />
+      <AutoComplete />
       <GlobeVisualization />
     </Container>
   );

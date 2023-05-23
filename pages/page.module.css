@@ -3,12 +3,14 @@
   color: #efefef;
   margin: 0;
   padding: 0; }
-  .container h1 {
-    margin-block-start: 0;
-    margin: 0;
-    margin-block-end: 0; }
-  .container .fixed {
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    width: 50%; }
+
+.container h1 {
+  margin-block-start: 0;
+  margin: 0;
+  margin-block-end: 0; }
+
+.container .fixed {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 50%; }
