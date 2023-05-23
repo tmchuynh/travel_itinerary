@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "scss": "node-sass --watch app -o app",
+    "scss": "node-sass --watch pages -o pages",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
