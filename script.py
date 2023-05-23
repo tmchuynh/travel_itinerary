@@ -16,9 +16,9 @@ cursor = conn.cursor()
 geolocator = Nominatim(user_agent='my_geocoder')
 
 def create_table():
-    # Creates the 'locations' table if it doesn't exist
+    # Creates the 'coordinates' table if it doesn't exist
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS locations (
+        CREATE TABLE IF NOT EXISTS coordinates (
             id INT AUTO_INCREMENT PRIMARY KEY,
             city VARCHAR(255),
             country VARCHAR(255),
@@ -29,7 +29,7 @@ def create_table():
 
 def save_coordinates(city, country, latitude, longitude):
     # Saves coordinates to the MySQL database
-    sql = "INSERT INTO locations (city, country, latitude, longitude) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO coordinates (city, country, latitude, longitude) VALUES (%s, %s, %s, %s)"
     values = (city, country, latitude, longitude)
     cursor.execute(sql, values)
     conn.commit()
