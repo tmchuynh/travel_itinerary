@@ -1,7 +1,6 @@
 import styles from '../../../page.module.scss';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import MapComponent from './components/MapComponent';
 import RestaurantList from './components/RestaurantList';
 import ThingsToDoList from './components/ThingsToDoList';
@@ -9,13 +8,8 @@ import ThingsToDoList from './components/ThingsToDoList';
 export default function DestinationPage() {
   const [data, setData] = useState(null);
   const [position, setPosition] = useState(null);
-  
+
   useEffect(() => {
-    const router = useRouter();
-  const { pathname } = router;
-
-  console.log('URL pathname:', pathname);
-
     const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
     const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
     console.log('cityCountry:', cityCountry);
