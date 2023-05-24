@@ -44,9 +44,8 @@ function ThingsToDoList({ google, latitude, longitude }: ThingsToDoListProps) {
       <ul>
         {thingsToDo.map((thing) => (
           <li key={thing.place_id}>
-            <PlaceInfo pageTitle={thing.name}/>
+            {thing.name}
           </li>
-          
         ))}
       </ul>
     </div>

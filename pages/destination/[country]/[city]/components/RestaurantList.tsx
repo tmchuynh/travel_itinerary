@@ -43,7 +43,7 @@ function RestaurantList({ latitude, longitude }: RestaurantListProps) {
         {restaurants.map((place) => (
           <li key={place.place_id}>
             {place.name}
-            </li>
+          </li>
         ))}
       </ul>
     </div>
