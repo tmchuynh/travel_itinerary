@@ -18,6 +18,11 @@ export default function DestinationPage() {
     const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
     const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
 
+    /**
+   * Asynchronously fetches data from the server and updates the component state with the data.
+   *
+   * @return {Promise<void>} A promise that resolves when the data has been fetched and the component state has been updated.
+   */
     async function fetchData() {
       try {
         console.log('Executing query...');
