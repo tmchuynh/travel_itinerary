@@ -4,25 +4,14 @@ import MapComponent from './components/MapComponent';
 import RestaurantList from './components/RestaurantList';
 import ThingsToDoList from './components/ThingsToDoList';
 
-interface Data {
-  latitude: number;
-  longitude: number;
-  // Add other properties as needed
-}
-
 export default function DestinationPage() {
-  const [data, setData] = useState<Data[] | null>(null);
-  const [position, setPosition] = useState<number[]>([]);
+  const [data, setData] = useState<any>(null); // State variable to hold data, initially set to null
+  const [position, setPosition] = useState<[number, number]>([]); // State variable for position, initially an empty array
 
   useEffect(() => {
     const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
     const cityValue = decodeURIComponent(window.location.pathname.split('/')[3]);
 
-    /**
-   * Asynchronously fetches data from the server and updates the component state with the data.
-   *
-   * @return {Promise<void>} A promise that resolves when the data has been fetched and the component state has been updated.
-   */
     async function fetchData() {
       try {
         console.log('Executing query...');
@@ -36,35 +25,31 @@ export default function DestinationPage() {
             cityValue,
           }),
         });
-        const data: Data[] = await response.json();
-        setData(data);
-        console.log('DATA: ', data); // data coming back from the MySQL server
+        const data = await response.json();
+        setData(data); // Update data state with the fetched data
+        console.log("DATA: ", data); // Log the data coming back from the MySQL server
         if (data && data.length > 0) {
-          const { latitude, longitude } = data[0];
-          setPosition([latitude, longitude]);
+          const latitude = data[0].latitude; // Extract latitude from data
+          const longitude = data[0].longitude; // Extract longitude from data
+          setPosition([latitude, longitude]); // Update position state with latitude and longitude
         }
       } catch (error) {
         console.error(error);
       }
     }
 
-    fetchData();
+    fetchData(); // Call the fetchData function to fetch data
   }, []);
-
-  const handleMarkerChange = (latitude: number, longitude: number) => {
-    // Update the marker position
-    setPosition([latitude, longitude]);
-  };
 
   return (
     <div>
       <h1>Destination Page</h1>
-      <MapComponent center={position} onMarkerChange={handleMarkerChange} />
+      <MapComponent center={position} />
       <div style={{ display: 'flex' }}>
         <RestaurantList latitude={position[0]} longitude={position[1]} />
         <ThingsToDoList latitude={position[0]} longitude={position[1]} />
       </div>
-      <Link href="/">Home</Link>
+      <Link href={'/'}>Home</Link>
     </div>
   );
 }
