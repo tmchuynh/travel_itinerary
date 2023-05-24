@@ -11,30 +11,29 @@ interface MapContainerProps {
  * Renders a Map component using Google Maps API, with a marker at the specified center location.
  *
  * @param {MapContainerProps} props - the component props:
- *   @param {google.maps} props.google - the Google Maps API object
- *   @param {number[]} props.center - the coordinates of the center of the map
- *   @param {Function} props.onMarkerChange - function called when the map is clicked, with the latitude and longitude of the clicked position
+ * @param {google.maps} props.google - the Google Maps API object
+ * @param {number[]} props.center - the coordinates of the center of the map
+ * @param {Function} props.onMarkerChange - function called when the map is clicked, with the latitude and longitude of the clicked position
  * @return {JSX.Element} the Map component with a Marker component at the specified center
  */
 const MapContainer: React.FC<MapContainerProps> = ({ google, center, onMarkerChange }) => {
-    /**
-   * Handles a click event on the map by extracting the latitude and longitude
-   * from the event object and passing them to the onMarkerChange function.
-   *
-   * @param {MapMouseEvent<google.maps.Map>} event - The click event on the map.
-   * @return {void} This function does not return anything.
-   */
-  const handleMapClick = (event: MapMouseEvent<google.maps.Map>) => {
-    const latitude = event.latLng?.lat();
-    const longitude = event.latLng?.lng();
-    if (latitude && longitude) {
-      onMarkerChange(latitude, longitude);
-    }
-  };
-
+  // Define map styles
   const mapStyles = {
     width: '100%',
     height: '400px',
+  };
+
+  // Handle map click event
+  const handleMapClick = (event: MapMouseEvent<google.maps.Map>) => {
+    // Extract latitude and longitude from the clicked location
+    const latitude = event.latLng?.lat();
+    const longitude = event.latLng?.lng();
+
+    // Check if latitude and longitude are valid
+    if (latitude && longitude) {
+      // Call the onMarkerChange function with the new coordinates
+      onMarkerChange(latitude, longitude);
+    }
   };
 
   return (
@@ -55,6 +54,7 @@ const MapContainer: React.FC<MapContainerProps> = ({ google, center, onMarkerCha
     </Map>
   );
 };
+
 
 export default GoogleApiWrapper({
   apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',

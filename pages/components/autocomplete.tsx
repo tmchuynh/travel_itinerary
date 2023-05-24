@@ -12,11 +12,14 @@ export default function AutoComplete() {
   const [citiesAndCountries, setCitiesAndCountries] = useState<City[]>([]);
 
   useEffect(() => {
+    // Fetch countries data from the API
     fetch('https://countriesnow.space/api/v0.1/countries')
       .then((response) => response.json())
       .then((data) => {
+        // Process the data to extract cities and countries
         const citiesAndCountriesData: City[] = data.data.reduce((acc: City[], country: any) => {
           if (Array.isArray(country.cities)) {
+            // Map cities to City objects with label, value, and country properties
             const citiesWithCountry: City[] = country.cities.map((city: string) => ({
               label: `${city}, ${country.country}`,
               value: city,
@@ -26,13 +29,16 @@ export default function AutoComplete() {
           }
           return acc;
         }, []);
-
+  
+        // Set the extracted cities and countries data to the state
         setCitiesAndCountries(citiesAndCountriesData);
       })
       .catch((error) => {
+        // Handle any errors that occur during the fetch operation
         console.error('Error fetching cities:', error);
       });
   }, []);
+  
 
 
   /**
