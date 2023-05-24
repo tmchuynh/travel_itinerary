@@ -4,9 +4,15 @@ import MapComponent from './components/MapComponent';
 import RestaurantList from './components/RestaurantList';
 import ThingsToDoList from './components/ThingsToDoList';
 
+interface Data {
+  latitude: number;
+  longitude: number;
+  // Add other properties as needed
+}
+
 export default function DestinationPage() {
-  const [data, setData] = useState(null);
-  const [position, setPosition] = useState([]);
+  const [data, setData] = useState<Data[] | null>(null);
+  const [position, setPosition] = useState<number[]>([]);
 
   useEffect(() => {
     const cityCountry = decodeURIComponent(window.location.pathname.split('/')[2]);
@@ -25,12 +31,11 @@ export default function DestinationPage() {
             cityValue,
           }),
         });
-        const data = await response.json();
+        const data: Data[] = await response.json();
         setData(data);
-        console.log("DATA: ", data); // data coming back from the mysql server
+        console.log('DATA: ', data); // data coming back from the MySQL server
         if (data && data.length > 0) {
-          const latitude = data[0].latitude;
-          const longitude = data[0].longitude;
+          const { latitude, longitude } = data[0];
           setPosition([latitude, longitude]);
         }
       } catch (error) {
@@ -41,16 +46,20 @@ export default function DestinationPage() {
     fetchData();
   }, []);
 
+  const handleMarkerChange = (latitude: number, longitude: number) => {
+    // Update the marker position
+    setPosition([latitude, longitude]);
+  };
+
   return (
-    <div >
+    <div>
       <h1>Destination Page</h1>
-      <MapComponent center={position} />
-      <div style={{ display: 'flex'}}>
+      <MapComponent center={position} onMarkerChange={handleMarkerChange} />
+      <div style={{ display: 'flex' }}>
         <RestaurantList latitude={position[0]} longitude={position[1]} />
         <ThingsToDoList latitude={position[0]} longitude={position[1]} />
       </div>
-      <Link href={'/'}>Home</Link>
+      <Link href="/">Home</Link>
     </div>
   );
 }
-
