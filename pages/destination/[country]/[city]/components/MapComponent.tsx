@@ -7,7 +7,23 @@ interface MapContainerProps {
   onMarkerChange: (latitude: number, longitude: number) => void;
 }
 
+/**
+ * Renders a Map component using Google Maps API, with a marker at the specified center location.
+ *
+ * @param {MapContainerProps} props - the component props:
+ *   @param {google.maps} props.google - the Google Maps API object
+ *   @param {number[]} props.center - the coordinates of the center of the map
+ *   @param {Function} props.onMarkerChange - function called when the map is clicked, with the latitude and longitude of the clicked position
+ * @return {JSX.Element} the Map component with a Marker component at the specified center
+ */
 const MapContainer: React.FC<MapContainerProps> = ({ google, center, onMarkerChange }) => {
+    /**
+   * Handles a click event on the map by extracting the latitude and longitude
+   * from the event object and passing them to the onMarkerChange function.
+   *
+   * @param {MapMouseEvent<google.maps.Map>} event - The click event on the map.
+   * @return {void} This function does not return anything.
+   */
   const handleMapClick = (event: MapMouseEvent<google.maps.Map>) => {
     const latitude = event.latLng?.lat();
     const longitude = event.latLng?.lng();
