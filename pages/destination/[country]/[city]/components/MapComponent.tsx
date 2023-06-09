@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker, MapProps } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, IMapProps } from 'google-maps-react';
 
 interface MapContainerProps {
   google: any;
